@@ -1,0 +1,88 @@
+Lugares para indagar:
+
+
+(Identificacion de pines)
+https://www.facebook.com/groups/SPIKEcommunity/posts/1168406093537621/?mibextid=HsNCOg
+
+(Documentacion pines)
+https://github.com/GianCann/SpikePrimeHub
+
+(I2C pins for arduino)
+https://www.instructables.com/I2C-between-Arduinos/
+
+(Raspberry HAT para controlar cosas de spike)
+https://www.raspberrypi.com/news/raspberry-pi-build-hat-lego-education/
+
+(conexion entre arduino y NXT)
+https://www.dexterindustries.com/howto/connect-the-arduino-and-the-lego-mindstorms-together/
+
+(conexion UART spike libreria)
+https://antonsmindstorms.com/2022/11/18/lms-esp32-tutorials-part-0-how-to-get-started/
+
+(libreria UART Remote arduino)
+https://uartremote.readthedocs.io/en/latest/arduinouartremote.html
+
+(MPY robots Tools)
+https://github.com/antonvh/mpy-robot-tools
+
+(conexion I2C entre EV3 y arduino)
+https://www.dexterindustries.com/howto/connecting-ev3-arduino/
+
+(I2C scanner)
+https://playground.arduino.cc/Main/I2cScanner/
+
+(Links utiles y conexion entre Raspberry Pico y Spike)
+https://github.com/justMega/spikeResources
+
+(Documentacion completa de Spike)
+https://hubmodule.readthedocs.io/en/latest/port/
+
+(Documentacion extra de Spike)
+https://lego.github.io/MINDSTORMS-Robot-Inventor-hub-API/class_usb_vcp.html
+
+(Conexion bluetooth entre Spikes y Raspberry)
+https://github.com/bricklife/LEGO-Hub2Hub-Communication-Hacks
+
+(Conexion bluetooth en mas profundidad)
+https://github.com/maarten-pennings/Lego-Mindstorms
+
+(Video Rasbperry Pi Zero y Spike)
+https://www.youtube.com/watch?v=K0kwiPHDSnw
+
+(Spike Comunication)
+https://github.com/PhoBricks/SPIKE_communication
+
+(Hub2Hub BLE)
+https://www.facebook.com/groups/SPIKEcommunity/posts/1322920758086153/
+
+(Documentacion Hub2Hub)
+https://hubmodule.readthedocs.io/en/latest/hub2hub/
+
+(Muchos Tutoriales con Arduino)
+http://robojax.com/learn/arduino/
+
+(Usar 2 VL53L0X (no lo usamos por mucho consumo de memoria))
+http://robojax.com/learn/arduino/?vid=robojax_VL53L0X_multiple
+
+(Usar 4 VL53L0X (no lo usamos por mucho consumo de memoria))
+http://robojax.com/learn/arduino/?vid=robojax_VL53L0X_multiple_4
+
+(I2C Scanner)
+http://robojax.com/learn/arduino/?vid=robojax-I2C-scanner
+
+(Usar 6 VL53L0X)
+https://arduinoproyek.wordpress.com/2019/03/27/vl53l0x-multi-sensor/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
