@@ -1,0 +1,310 @@
+<mxfile host="app.diagrams.net" modified="2023-04-22T21:38:56.174Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="kaoIo46P0NAOqL634uRN" version="21.1.8" type="device">
+  <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+    <mxGraphModel dx="954" dy="527" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="btyRM0pktlCXf4Li8Wps-1" value="&lt;h1&gt;&lt;u&gt;Arduino&lt;/u&gt;&lt;/h1&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="252" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-5" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="btyRM0pktlCXf4Li8Wps-1" target="btyRM0pktlCXf4Li8Wps-14" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="342" y="330" as="sourcePoint" />
+            <mxPoint x="622" y="90" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="392" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-6" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="btyRM0pktlCXf4Li8Wps-1" target="btyRM0pktlCXf4Li8Wps-7" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="182" y="90" as="sourcePoint" />
+            <mxPoint x="122" y="90" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="130" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-7" value="Controls Claw/Servos" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="10" y="90" width="240" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-8" value="Actions" style="whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="btyRM0pktlCXf4Li8Wps-7" vertex="1">
+          <mxGeometry x="7" y="30" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-9" value="Open" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-7" vertex="1">
+          <mxGeometry x="117" y="30" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-11" value="Close" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-7" vertex="1">
+          <mxGeometry x="117" y="70" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-12" value="Lift" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-7" vertex="1">
+          <mxGeometry x="117" y="110" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-13" value="Lower" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-7" vertex="1">
+          <mxGeometry x="117" y="150" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-20" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="btyRM0pktlCXf4Li8Wps-7" source="btyRM0pktlCXf4Li8Wps-8" target="btyRM0pktlCXf4Li8Wps-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="282" y="220" as="sourcePoint" />
+            <mxPoint x="332" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-21" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="btyRM0pktlCXf4Li8Wps-7" source="btyRM0pktlCXf4Li8Wps-8" target="btyRM0pktlCXf4Li8Wps-11" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="52" y="60" as="sourcePoint" />
+            <mxPoint x="82" y="57.85714285714289" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-22" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="btyRM0pktlCXf4Li8Wps-7" source="btyRM0pktlCXf4Li8Wps-8" target="btyRM0pktlCXf4Li8Wps-12" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="62" y="70" as="sourcePoint" />
+            <mxPoint x="92" y="67.85714285714289" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-23" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="btyRM0pktlCXf4Li8Wps-7" source="btyRM0pktlCXf4Li8Wps-8" target="btyRM0pktlCXf4Li8Wps-13" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="72" y="80" as="sourcePoint" />
+            <mxPoint x="102" y="77.85714285714289" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-14" value="Controls &#39;Time of Flight&#39; Sensors" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="272" y="90" width="538" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-15" value="Actions" style="whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="btyRM0pktlCXf4Li8Wps-14" vertex="1">
+          <mxGeometry x="10" y="30" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-16" value="Receives data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-14" vertex="1">
+          <mxGeometry x="120" y="30" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-17" value="Sends data to Spike" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-14" vertex="1">
+          <mxGeometry x="120" y="80" width="85" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-35" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="btyRM0pktlCXf4Li8Wps-14" source="btyRM0pktlCXf4Li8Wps-15" target="btyRM0pktlCXf4Li8Wps-16" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-165" y="60" as="sourcePoint" />
+            <mxPoint x="-135" y="57.85714285714289" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-36" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="btyRM0pktlCXf4Li8Wps-14" target="btyRM0pktlCXf4Li8Wps-17" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="258" y="100" as="sourcePoint" />
+            <mxPoint x="130" y="55" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-37" value="Receives distances from the environment (obstacles, walls, bridges)." style="rounded=1;whiteSpace=wrap;html=1;fontColor=#333333;fillColor=#f5f5f5;strokeColor=#666666;" parent="btyRM0pktlCXf4Li8Wps-14" vertex="1">
+          <mxGeometry x="258" y="30" width="222" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-38" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="btyRM0pktlCXf4Li8Wps-14" source="btyRM0pktlCXf4Li8Wps-16" target="btyRM0pktlCXf4Li8Wps-37" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="70" as="sourcePoint" />
+            <mxPoint x="140" y="65" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-39" value="Checks if there&#39;s something blocking the way." style="rounded=1;whiteSpace=wrap;html=1;fontColor=#333333;fillColor=#f5f5f5;strokeColor=#666666;" parent="btyRM0pktlCXf4Li8Wps-14" vertex="1">
+          <mxGeometry x="260" y="77.5" width="220" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-40" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="btyRM0pktlCXf4Li8Wps-14" source="btyRM0pktlCXf4Li8Wps-37" target="btyRM0pktlCXf4Li8Wps-39" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="60" as="sourcePoint" />
+            <mxPoint x="268" y="55" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="508" y="45" />
+              <mxPoint x="508" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-41" value="" style="endArrow=classic;html=1;rounded=0;fontColor=#000000;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="btyRM0pktlCXf4Li8Wps-14" target="btyRM0pktlCXf4Li8Wps-42" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="118" y="110" as="sourcePoint" />
+            <mxPoint x="48" y="155" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="66" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-42" value="- o: obstacle&lt;br&gt;- w: wall&lt;br&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- u: unkown&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- l: left&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- r: right&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- t: bottom&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- a: above&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontColor=#333333;align=left;fillColor=#f5f5f5;strokeColor=#666666;" parent="btyRM0pktlCXf4Li8Wps-14" vertex="1">
+          <mxGeometry x="10" y="150" width="112" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="btyRM0pktlCXf4Li8Wps-45" target="btyRM0pktlCXf4Li8Wps-47" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-45" value="&lt;h1&gt;&lt;u&gt;Lego Spike&lt;/u&gt;&lt;/h1&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="600" y="530" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-46" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontColor=#000000;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="6" y="500" as="sourcePoint" />
+            <mxPoint x="846" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-47" value="Receives info from Arduino" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="10" y="580" width="450" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-51" value="- o: turns right and checks if there is a wall. If not, it avoids the obstacle by circling it. If there is, turns the other way and avoids the obstacle. It is sure that if the robot was unable to avoid the obstacle because of a wall on the other side, it will on this side. Therefore, it is not necessary to check again. It avoids the obstacle circling it." style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#e1d5e7;strokeColor=#9673a6;spacingTop=0;spacing=0;" parent="btyRM0pktlCXf4Li8Wps-47" vertex="1">
+          <mxGeometry x="110" y="40" width="330" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-54" value="Letters" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="btyRM0pktlCXf4Li8Wps-47" vertex="1">
+          <mxGeometry x="8" y="30" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-55" value="- w: &lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- Line: if the robot is less than 7 cm close to the wall, turns to one side, and checks if there is another wall. If not, it continues. If there is, it turns the other way round and checks again. If there is a wall as well, comes back.&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- Rescue Area: the robot turns when the ToFs see a wall" style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-47" vertex="1">
+          <mxGeometry x="110" y="190" width="330" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#000000;" parent="1" source="btyRM0pktlCXf4Li8Wps-42" target="btyRM0pktlCXf4Li8Wps-45" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="338" y="440" />
+              <mxPoint x="675" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-62" value="Controls the motors" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="480" y="610" width="150" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-67" value="Forward" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-62" vertex="1">
+          <mxGeometry x="30" y="30" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-68" value="Backwards" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-62" vertex="1">
+          <mxGeometry x="30" y="70" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-70" value="Turns right" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-62" vertex="1">
+          <mxGeometry x="30" y="150" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-69" value="Turns Left" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-62" vertex="1">
+          <mxGeometry x="30" y="110" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-64" value="PID" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="640" y="800" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-65" value="Color Sensors" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="480" y="810" width="150" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-78" value="Left Green" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-65" vertex="1">
+          <mxGeometry x="30" y="30" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-79" value="Right Green" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-65" vertex="1">
+          <mxGeometry x="30" y="70" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-80" value="Double Green" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-65" vertex="1">
+          <mxGeometry x="30" y="110" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-81" value="Silver" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-65" vertex="1">
+          <mxGeometry x="30" y="150" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-87" value="Double Black" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-65" vertex="1">
+          <mxGeometry x="30" y="190" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-88" value="Right Black" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-65" vertex="1">
+          <mxGeometry x="30" y="230" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-66" value="Gyroscope" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="640" y="610" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-90" value="Turns" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-66" vertex="1">
+          <mxGeometry x="60" y="40" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-91" value="Ramp" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-66" vertex="1">
+          <mxGeometry x="60" y="80" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-92" value="Seesaw" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="btyRM0pktlCXf4Li8Wps-66" vertex="1">
+          <mxGeometry x="60" y="120" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="btyRM0pktlCXf4Li8Wps-89" value="Left Black" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="510" y="1080" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="WozkW6pBYvAF7gT-I08m-1" target="WozkW6pBYvAF7gT-I08m-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="1180" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="230" y="1180" />
+              <mxPoint x="230" y="1180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-1" value="&lt;h1&gt;&lt;u&gt;Arduino&lt;/u&gt;&lt;/h1&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="10" y="1150" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-4" value="Sends" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1160" width="450" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-5" value="- o: there&#39;s an obstacle in the way." style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#e1d5e7;strokeColor=#9673a6;spacingTop=0;spacing=0;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-4">
+          <mxGeometry x="110" y="40" width="190" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WozkW6pBYvAF7gT-I08m-4" source="WozkW6pBYvAF7gT-I08m-6" target="WozkW6pBYvAF7gT-I08m-5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="100" y="55" />
+              <mxPoint x="100" y="55" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WozkW6pBYvAF7gT-I08m-4" source="WozkW6pBYvAF7gT-I08m-6" target="WozkW6pBYvAF7gT-I08m-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="40" y="120" />
+              <mxPoint x="110" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-6" value="Letters" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-4">
+          <mxGeometry x="8" y="30" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-7" value="- w: &lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- Line: if the robot is less than 7 cm close to the wall, sends a warning to the Lego Spike of what to do.&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- Rescue Area: tells the Spike that it needs to turn" style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-4">
+          <mxGeometry x="110" y="90" width="330" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="WozkW6pBYvAF7gT-I08m-11">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="170" y="1650" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="210" y="1650" />
+              <mxPoint x="210" y="1790" />
+            </Array>
+            <mxPoint x="170" y="1650" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-10" value="&lt;h1&gt;&lt;u&gt;Lego Spike&lt;/u&gt;&lt;/h1&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1620" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-11" value="Receives" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="290" y="1590" width="450" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-12" value="- o: turns right and checks if there is a wall. If not, it avoids the obstacle by circling it. If there is, turns the other way and avoids the obstacle. It is sure that if the robot was unable to avoid the obstacle because of a wall on the other side, it will on this side. Therefore, it is not necessary to check again. It avoids the obstacle circling it." style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#e1d5e7;strokeColor=#9673a6;spacingTop=0;spacing=0;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-11">
+          <mxGeometry x="110" y="40" width="330" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-13" value="Letters" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-11">
+          <mxGeometry x="8" y="30" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-14" value="- w: &lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- Line: if the robot is less than 7 cm close to the wall, turns to one side, and checks if there is another wall. If not, it continues. If there is, it turns the other way round and checks again. If there is a wall as well, comes back.&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;	&lt;/span&gt;- Rescue Area: the robot turns when the ToFs see a wall" style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-11">
+          <mxGeometry x="110" y="190" width="330" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-22" value="Receives" style="swimlane;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1350" width="450" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-23" value="- m: the robot is moving" style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#e1d5e7;strokeColor=#9673a6;spacingTop=0;spacing=0;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-22">
+          <mxGeometry x="125" y="40" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WozkW6pBYvAF7gT-I08m-22" source="WozkW6pBYvAF7gT-I08m-24" target="WozkW6pBYvAF7gT-I08m-23">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="100" y="60" />
+              <mxPoint x="100" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WozkW6pBYvAF7gT-I08m-22" source="WozkW6pBYvAF7gT-I08m-24" target="WozkW6pBYvAF7gT-I08m-25">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="48" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-24" value="Letters" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-22">
+          <mxGeometry x="8" y="30" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WozkW6pBYvAF7gT-I08m-25" value="- d: the robot is not moving" style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="WozkW6pBYvAF7gT-I08m-22">
+          <mxGeometry x="125" y="90" width="175" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
