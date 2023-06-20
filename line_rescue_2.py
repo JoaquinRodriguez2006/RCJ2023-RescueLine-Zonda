@@ -42,7 +42,7 @@ salida = 0
 
 
 global s
-
+######################### UPDATE #########################
 def update():
     global r1,g1,b1,ov1
     global r3,g3,b3,ov3
@@ -87,8 +87,9 @@ def update():
     luz_1 = sen_1.get_reflected_light()
     luz_2 = sen_2.get_reflected_light()
     luz_3 = sen_3.get_reflected_light()
-
-
+############################################################################################################################################################################################
+################################################################################# LINE FOLLOWING FUNCTIONS #################################################################################
+######################### TURNS #########################
 def giro_90_der():
     motor_pair.start_tank(0,0)
     # wait_for_seconds(1)
@@ -128,6 +129,7 @@ def girar_num_grados_der(num):
     motor_pair.start_tank(0, 0)
     hub.motion_sensor.reset_yaw_angle()
 
+######################### GREENS #########################
 def posible_verde():
     pera = 0
     hub.motion_sensor.reset_yaw_angle()
@@ -161,7 +163,6 @@ def posible_verde():
             while hub.motion_sensor.get_yaw_angle() < 10:
                 motor_pair.start_tank(60,-60)
             motor_pair.start_tank(0,0)
-
 
 def verifica_verde():
     manzana = 0
@@ -274,7 +275,6 @@ def buscar_linea(direccion):
                 motor_pair.start_tank(80,-80)
             # motor_pair.move_tank(0.7,'cm',80,-80)
 
-
 def verifica_l_giro():
     manzana = 0
     update()
@@ -368,6 +368,7 @@ def verifica_l_giro():
         manzana = 0
     manzana = 0
 
+######################### DOUBLE BLACK #########################
 def verifica_doble_negro():
     motor_pair.start_tank(0,0)
     # wait_for_seconds(1)
@@ -388,42 +389,8 @@ def verifica_doble_negro():
         # motor_pair.move_tank(2,'cm',-30,-30)
 
 
-def distance_com():
-    global s
-    global dist
-    b.write("Obstaculo\n")
-    # motor_pair.start_tank(0, 0)
-    # wait_for_seconds(0.2)
-    s=b.read(5).decode()
-    print(s)
-    if (s!='R' and s!='RR' and s!='RRR'):
-        if (s!='C' and s!='CC' and s!='CCC'):
-            if (s!='S' and s!='SS' and s!='SSS'):
-                if (s!='L' and s!='LL' and s!='LLL'):
-                    if (s!='M' and s!='MM' and s!='MMM'):
-                        if (s!='N' and s!='NN' and s!='NNN'):
-                            dist = 7
-                        else:
-                            dist = 6
-                    else:
-                        dist = 5
-                else:
-                    dist = 4
-            else:
-                dist = 3
-        else:
-            dist = 2
-    else:
-        dist = 1
-    print(dist)
-
+######################### OBSTACLE DETECTION #########################
 ant = 0
-
-
-#################################################
-#################################################
-#################################################
-
 def obstacle_detection():
     global ant
     global s
@@ -686,12 +653,7 @@ def obstacle_detection():
             motor_pair.start_tank(0, 0)
             motor_pair.move_tank(3, 'cm', 50, 50)
 
-
-#################################################
-#################################################
-#################################################
-
-
+######################### RAMP AND SEESAW #########################
 def subida():
     error = 0
     error_previo = 0
@@ -749,8 +711,6 @@ def subida():
         motor_pair.start_tank(0,0)
         wait_for_seconds(1)
 
-
-
 def bajada():
     error = 0
     error_previo = 0
@@ -791,8 +751,55 @@ def bajada():
         motor_pair.start_tank(0,0)
         wait_for_seconds(1)
 
-############## Funciones de Comunicación - TOFs - Arduino Uno ##############
+######################### LEGO-ARDUINO COMMUNICATION UTILITIES #########################
+def distance_com():
+    global s
+    global dist
+    b.write("Obstaculo\n")
+    # motor_pair.start_tank(0, 0)
+    # wait_for_seconds(0.2)
+    s=b.read(5).decode()
+    print(s)
+    if (s!='R' and s!='RR' and s!='RRR'):
+        if (s!='C' and s!='CC' and s!='CCC'):
+            if (s!='S' and s!='SS' and s!='SSS'):
+                if (s!='L' and s!='LL' and s!='LLL'):
+                    if (s!='M' and s!='MM' and s!='MMM'):
+                        if (s!='N' and s!='NN' and s!='NNN'):
+                            dist = 7
+                        else:
+                            dist = 6
+                    else:
+                        dist = 5
+                else:
+                    dist = 4
+            else:
+                dist = 3
+        else:
+            dist = 2
+    else:
+        dist = 1
+    print(dist)
 
+#########################################################################################################################################################################################
+################################################################################# RESCUE AREA FUNCTIONS #################################################################################
+######################### DETECTION UTILITIES #########################
+def detect_walls(assigned_distance):
+    global s
+    global dist
+    rescue_com('Rescue\n')
+    if (dist <= assigned_distance): # distancia menor a 10
+        return True
+
+def detect_victims(assigned_distance):
+    global s
+    global dist
+    global vict_status
+    rescue_com('Rescue_v\n')
+    if (vict_status <= assigned_distance):
+        victim_com(rescue_com('SpottedVictim_r\n')) # Spotted Victim - Rescue it!
+
+######################### LEGO-ARDUINO COMMUNICATION UTILITIES #########################
 def rescue_com(message):
     global s
     global dist_rescue
@@ -834,7 +841,6 @@ def rescue_com(message):
     return dist
     return vict_status
 
-
 def victim_com(message):
     global claw_status
 
@@ -851,22 +857,7 @@ def victim_com(message):
 
     return claw_status
 
-######################################################################################## RESCUE AREA FUNCTIONS ########################################################################################
-def detect_walls(assigned_distance):
-    global s
-    global dist
-    rescue_com('Rescue\n')
-    if (dist <= assigned_distance): # distancia menor a 10
-        return True
-
-def detect_victims(assigned_distance):
-    global s
-    global dist
-    global vict_status
-    rescue_com('Rescue_v\n')
-    if (vict_status <= assigned_distance):
-        victim_com(rescue_com('SpottedVictim_r\n')) # Spotted Victim - Rescue it!
-
+######################### TURNS #########################
 def turn_x_degrees(num):
     hub.motion_sensor.reset_yaw_angle()
     while (hub.motion_sensor.get_yaw_angle() < num):
@@ -874,7 +865,13 @@ def turn_x_degrees(num):
     motor_pair.start_tank(0, 0)
     hub.motion_sensor.reset_yaw_angle()
 
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+#################################################################################### MAIN CODE ##########################################################################################
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
 
+######################### LINE-FOLLOWING PART #########################
 while True:
     update()
     error = luz_1 - luz_3
@@ -916,15 +913,30 @@ while True:
                     salida = int(1.7 * proporcional + ki * integral + kd * derivada)
                     motor_pair.start_tank(30 + salida,30 - salida)
 
-######## RESCUE AREA ########
+############################ RESCUE AREA ##############################
+global green_corner
+green_corner = False
 while True:
     if col_1 == 'plateado' or col_3 == 'plateado':
         state = 'rescue'
+        substate = 'looking for green corner'
+
+        while green_corner != True:
+            motor_pair.start_tank(60, 60)
+            if detect_walls(1):
+                turn_x_degrees(270)
+                motor_pair.start_tank(60, 60)
+            if col_1 == 'green' and col_3 == 'green':
+                green_corner = True
+                rescue_com('Rescue_cd\n')
+                
+"""
         substate = 'exploring'
 
         if (state == 'rescue') and (substate == 'exploring'):
             motor_pair.start_tank(20,20)
             rescue_com("Rescue\n")
+
             if detect_walls(1):
                 turn_x_degrees(90)
                 if detect_walls(1):
@@ -957,7 +969,7 @@ while True:
                     if detect_walls(1):
                         turn_x_degrees(270)
                     else:
-                        pass
+                        pass"""
 """
 if luz_3 < 19 or luz_1 < 19:
                     salida = int(2.6 * proporcional + ki * integral + kd * derivada)
