@@ -788,7 +788,7 @@ def detect_walls(assigned_distance):
     global s
     global dist
     rescue_com('Rescue\n')
-    if (dist <= assigned_distance): # distancia menor a 10
+    if (dist_rescue <= assigned_distance): # distancia menor a 10
         return True
 
 def detect_victims(assigned_distance):
@@ -809,37 +809,36 @@ def rescue_com(message):
     # motor_pair.start_tank(0, 0)
     # wait_for_seconds(0.2)
     s=b.read(5).decode()
+    print(s)
     if (s!='n' and s!='nn' and s!='nnn'): # 1: Near
         if (s!='a' and s!='aa' and s!='aaa'): # 2: Always
             if (s!='f' and s!='ff' and s!='fff'): # 3: Far
                 if (s!='u' and s!='uu' and s!='uuu'): # 4: Nule
-                    dist_rescue = 5
+                    dist_rescue = 'onion burger'
                 else:
-                    dist_rescue = 4
+                    dist_rescue = 'u'
             else:
-                dist_rescue = 3
+                dist_rescue = 'f'
         else:
-            dist_rescue = 2
+            dist_rescue = 'a'
     else:
-        dist_rescue = 1
-    print(dist)
+        dist_rescue = 'n'
 
-    if (s!='u' and s!= 'uu' and s!='uuu'): # 1: Nule
+"""    if (s!='u' and s!= 'uu' and s!='uuu'): # 1: Nule
         if (s!='s' and s!='ss' and s!='sss'): # 2: Spotted Victim
             if (s!='a' and s!='aa' and s!='aaa'): # 3: Always
                 if (s!='n' and s!='nn' and s!='nnn'): # 4: Non-Spotted
-                    vict_status = 5
+                    vict_status = 'cheese burger'
                 else:
-                    vict_status = 4
+                    vict_status = 'n'
             else:
-                vict_status = 3
+                vict_status = 'a'
         else:
-            vict_status = 2
+            vict_status = 's'
     else:
-        vict_status = 1
+        vict_status = 'u'
 
-    return dist
-    return vict_status
+    return vict_status"""
 
 def victim_com(message):
     global claw_status
@@ -872,7 +871,7 @@ def turn_x_degrees(num):
 #########################################################################################################################################################################################
 
 ######################### LINE-FOLLOWING PART #########################
-while True:
+"""while True:
     update()
     error = luz_1 - luz_3
     proporcional = error
@@ -911,28 +910,40 @@ while True:
                     motor_pair.start_tank(20 + salida,20 - salida)
                 else:
                     salida = int(1.7 * proporcional + ki * integral + kd * derivada)
-                    motor_pair.start_tank(30 + salida,30 - salida)
+                    motor_pair.start_tank(30 + salida,30 - salida)"""
 
-############################ RESCUE AREA ##############################
+############################ RESCUE AREA #########################
+####### VARIABLES THAT NEED TO BE INITIALIZATED WITH EVERY WHILE ####### 
 global green_corner
 green_corner = False
+global dist_rescue
+global state
+state = ''
+substate = ''
+
 while True:
+    update()
     if col_1 == 'plateado' or col_3 == 'plateado':
         state = 'rescue'
         substate = 'looking for green corner'
 
+    if state == 'rescue' and substate == 'looking for green corner':
+        green_corner = False
         while green_corner != True:
-            motor_pair.start_tank(60, 60)
-            if detect_walls(1):
-                turn_x_degrees(270)
-                motor_pair.start_tank(60, 60)
-            if col_1 == 'green' and col_3 == 'green':
+            update()
+            motor_pair.start_tank(20, 20)
+            rescue_com("Rescue\n")
+            if dist_rescue == 'n':
+                turn_x_degrees(90)
+            if col_1 == 'green' or col_3 == 'green':
                 green_corner = True
-                rescue_com('Rescue_cd\n')
-                
-"""
-        substate = 'exploring'
-
+                motor_pair.start_tank(0, 0)
+                susbtate = 'depositing the rescue kit'
+                rescue_com('Rescue_dc\n')
+                wait_for_seconds(14)
+                substate = 'exploring'
+    
+    elif state == 'rescue' and substate == 'exploring':
         if (state == 'rescue') and (substate == 'exploring'):
             motor_pair.start_tank(20,20)
             rescue_com("Rescue\n")
@@ -946,6 +957,12 @@ while True:
                 else:
                     motor_pair.move_tank(9, 'cm', 20, 20)
                     substate = 'looking for ball'
+            
+
+"""
+        substate = 'exploring'
+
+        
 
         if (state == 'rescue') and (substate == 'looking for ball'):
             rescue_com("Rescue_v\n")
@@ -969,8 +986,8 @@ while True:
                     if detect_walls(1):
                         turn_x_degrees(270)
                     else:
-                        pass"""
-"""
+                        pass
+
 if luz_3 < 19 or luz_1 < 19:
                     salida = int(2.6 * proporcional + ki * integral + kd * derivada)
                     motor_pair.start_tank(20 + salida,20 - salida)
