@@ -804,6 +804,9 @@ def rescue_com(message):
     global s
     global dist_rescue
     global vict_status
+    global confirmation
+    global claw_status
+    confirmation = False
 
     b.write(message)
     # motor_pair.start_tank(0, 0)
@@ -824,21 +827,26 @@ def rescue_com(message):
     else:
         dist_rescue = 'n'
 
-"""    if (s!='u' and s!= 'uu' and s!='uuu'): # 1: Nule
-        if (s!='s' and s!='ss' and s!='sss'): # 2: Spotted Victim
-            if (s!='a' and s!='aa' and s!='aaa'): # 3: Always
-                if (s!='n' and s!='nn' and s!='nnn'): # 4: Non-Spotted
+    if (s!='U' and s!= 'UU' and s!='UUU'): # 1: Nule
+        if (s!='S' and s!='SS' and s!='SSS'): # 2: Spotted Victim
+            if (s!='A' and s!='AA' and s!='AAA'): # 3: Always
+                if (s!='N' and s!='NN' and s!='NNN'): # 4: Non-Spotted
                     vict_status = 'cheese burger'
                 else:
-                    vict_status = 'n'
+                    vict_status = 'N'
             else:
-                vict_status = 'a'
+                vict_status = 'A'
         else:
-            vict_status = 's'
+            vict_status = 'S'
     else:
-        vict_status = 'u'
+        vict_status = 'U'
 
-    return vict_status"""
+    if (s == 'CONFIRMED'):
+        claw_status = 'StandBy'
+        confirmation = True
+    else:
+        claw_status = 'Unknown'
+        confirmation = confirmation
 
 def victim_com(message):
     global claw_status
@@ -918,10 +926,11 @@ global green_corner
 green_corner = False
 global dist_rescue
 global state
+global vict_status
 state = ''
 substate = ''
 
-while True:
+while True: 
     update()
     if col_1 == 'plateado' or col_3 == 'plateado':
         state = 'rescue'
@@ -943,21 +952,28 @@ while True:
                 wait_for_seconds(14)
                 substate = 'exploring'
     
-    elif state == 'rescue' and substate == 'exploring':
-        if (state == 'rescue') and (substate == 'exploring'):
-            motor_pair.start_tank(20,20)
-            rescue_com("Rescue\n")
+    elif (state == 'rescue') and (substate == 'exploring'):
+        motor_pair.start_tank(20,20)
+        rescue_com("Rescue\n")
+        if dist_rescue == 'n':
+            turn_x_degrees(90)
+            if dist_rescue == 'n':
+                turn_x_degrees(270)
+                motor_pair.move_tank(9, 'cm', 20, 20)
+                substate = 'looking for ball'
+            else:
+                motor_pair.move_tank(9, 'cm', 20, 20)
+                substate = 'looking for ball'
 
-            if detect_walls(1):
-                turn_x_degrees(90)
-                if detect_walls(1):
-                    turn_x_degrees(270)
-                    motor_pair.move_tank(9, 'cm', 20, 20)
-                    substate = 'looking for ball'
-                else:
-                    motor_pair.move_tank(9, 'cm', 20, 20)
-                    substate = 'looking for ball'
-            
+    elif (state == 'rescue') and (substate == 'looking for ball'):
+        rescue_com("Rescue_lv\n")
+        while turn_x_degrees(90) != True:
+            turn_x_degrees(90)
+            if vict_status == 'N':
+                print("Spotted Victim!")
+                rescue_com("Spotted_Victim")
+                wait_for_seconds(10)
+                         
 
 """
         substate = 'exploring'
