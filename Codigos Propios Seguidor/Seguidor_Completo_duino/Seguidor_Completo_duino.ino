@@ -144,7 +144,7 @@ void loop() {
         if((a < 110) || (b < 110)){
           // Serial.println(a);
           // Serial.println(b);
-          cont = cont+1;
+          cont = cont+1; 
           if (cont > 2){
             Serial.write('F');  // Frenar
             cont = 0;
