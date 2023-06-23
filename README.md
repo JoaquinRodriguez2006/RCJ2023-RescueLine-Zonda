@@ -28,7 +28,7 @@ In order to make this possible, we are using electronic components, 3D-designed 
 - Battery mount
 - Claw Gears (Left & Right)
 
-(You can check the .stl files here: ´´´3D Designs´´´])
+(You can check the .stl files here: '''3D Designs'''])
 
 ### Lego Spike Prime
 - Lego Spike Prime educational robotics kit
