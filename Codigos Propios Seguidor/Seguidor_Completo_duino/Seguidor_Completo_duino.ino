@@ -1,4 +1,4 @@
- #include <Wire.h>
+#include <Wire.h>
 #include <VL53L0X.h>
 #include <Servo.h>
 
@@ -179,7 +179,7 @@ void loop() {
       Serial.write('O');   // OK arriba  
     }
     else if (mov_big_down){
-      Mov_Servo(t,30);
+      Mov_Servo(t,40);
       // delay(400);
       Serial.write('O');   // OK abajo
     }
