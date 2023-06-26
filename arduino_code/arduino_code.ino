@@ -105,7 +105,7 @@ void loop() {
   if (Serial.available() > 0) {
     st1 = Serial.readStringUntil('\n'); //Read the serial data and store in var
     st1.trim();
-    if(st1 == "Seguidor" || st1 == "Obstaculo" || st1 == "Rescue" || st1 == "Rescue_pball" || st1 == "Rescue_dball_cube"){
+    if(st1 == "Seguidor" || st1 == "Obstaculo" || st1 == "Rescue" || st1 == "Rescue_pball" || st1 == "Rescue_dball_cube" || st1 == "Rescue_lv"){
       detectar = true;
     }
     else if (st1 == "Mov_Big_Up"){
@@ -168,17 +168,23 @@ void loop() {
   ///////////////////////// RESCUE & RESCUE ACTIONS /////////////////////////
       if (st1 == "Rescue"){ 
         digitalWrite(13,HIGH);
-        if((a > 200) && (b > 200)){
+        if((a > 200) && (b > 200) && (c > 200) && (d > 200)){
           Serial.write('u');  // Nothing
         }
-        else if((a < 80) && (b < 80)){
+        else if((a < 160) && (b < 160) && (c < 160) && (d < 160)){
           Serial.write('n');  // Near
         }
-        else if((a < 100) && (b < 100)){
-          Serial.write('a');  // always
+        else if((a < 100) && (b < 100) && (c < 100) && (d < 100)){
+          Serial.write('a');  // Always
         }
-        else if((a < 140) && (b < 140)){
-          Serial.write('f');  // Far
+        if((c > 200) && (d > 200)){
+          Serial.write('f');  // no forseeable victim
+        }
+        else if((c < 140) && (d < 140)){
+          Serial.write('s');  // spotted victim
+        }
+        else if((c < 100) && (d < 100)){
+          Serial.write('a');  // always
         }
       }
     
@@ -196,22 +202,19 @@ void loop() {
     // Deposit the cube
       if (st1 == "Rescue_dball_cube"){ // Preguntar con cualquier sensor
         // Lower and open the claw
-        Mov_Servo(t,60);
-        Mov_Servin(t,10);
-      // Close and lift the claw
-        Mov_Servin(t,70);
-        Mov_Servo(t,160);
-        }
+      Mov_Servo(t,60);
+      Mov_Servin(t,10);
+    // Close and lift the claw
+      Mov_Servin(t,70);
+      Mov_Servo(t,160);
       }
-      }
-  
     else if (mov_big_up){
       Mov_Servo(t,160);
       // delay(400);
       Serial.write('O');   // OK arriba  
     }
     else if (mov_big_down){
-      Mov_Servo(t,30);
+      Mov_Servo(t,40);
       // delay(400);
       Serial.write('O');   // OK abajo
     }
@@ -226,7 +229,7 @@ void loop() {
       Serial.write('O');   // OK cerrado
     }
     else{
-      
+
       }
     mov_big_up = false;
     mov_big_down = false;
@@ -234,7 +237,7 @@ void loop() {
     mov_small_closed = false;
     detectar = false;
     break;
-  }
+}
 }
 
 
@@ -252,7 +255,7 @@ void Mov_Servo(int tiempo, int destino){ // Movimiento regulado en el tiempo del
       delay(tiempo);                     
     }
   }
-}
+  
   else {
     for (int pos = Servo.read(); pos <= destino; pos += 1) {    // Si la posicion del servo es menor al de destino va a sumar
     Servo.write(pos);              
@@ -274,5 +277,4 @@ void Mov_Servin(int tiempo, int destino){ // Movimiento regulado en el tiempo de
     delay(tiempo);                       
     }
   }
-
 }
