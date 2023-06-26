@@ -859,6 +859,78 @@ def verifica_bajada():
         manzana = 0
     manzana = 0
 
+######################### LEGO-ARDUINO COMMUNICATION UTILITIES #########################
+def rescue_com(message):
+    global s
+    global dist_rescue
+    global vict_status
+    global confirmation
+    global claw_status
+    confirmation = False
+
+    b.write(message)
+    s = b.read(5).decode()
+    if (s!='n' and s!='nn' and s!='nnn'): # 1: Near
+        if (s!='a' and s!='aa' and s!='aaa'): # 2: Always
+            if (s!='f' and s!='ff' and s!='fff'): # 3: Far
+                if (s!='u' and s!='uu' and s!='uuu'): # 4: Nule
+                    dist_rescue = 'o'
+                else:
+                    dist_rescue = 'u'
+            else:
+                dist_rescue = 'f'
+        else:
+            dist_rescue = 'a'
+    else:
+        dist_rescue = 'n'
+
+    if (s!='f' and s!= 'ff' and s!='fff'): # 1: Nule
+        if (s!='s' and s!='ss' and s!='sss'): # 2: Spotted Victim
+            if (s!='a' and s!='aa' and s!='aaa'): # 3: Always
+                vict_status = 'cheese burger'
+            else:
+                vict_status = 'A'
+        else:
+            vict_status = 'S'
+    else:
+        vict_status = 'F'
+
+    if (s!= 'C' and s!= 'CC' and s!= 'CCC'):
+        claw_status = 'Unknown'
+    else:
+        claw_status = 'Pos1'
+
+def victim_com(message):
+    global claw_status
+
+    b.write(message)
+
+    s=b.read(5).decode()
+    if (s!='d' and s!='dd' and s!='ddd'): # 1: Done
+        if (s!='i' and s!='ii' and s!='iii'): # 2: Impossible
+            claw_status = 3
+        else:
+            claw_status = 2
+    else:
+        claw_status = 1
+
+    return claw_status
+
+######################### TURNS #########################
+def turn_x_degrees(num):
+    hub.motion_sensor.reset_yaw_angle()
+    while (hub.motion_sensor.get_yaw_angle() < num):
+        motor_pair.start_tank(40, -35)
+    motor_pair.start_tank(0, 0)
+    hub.motion_sensor.reset_yaw_angle()
+
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+#################################################################################### MAIN CODE ##########################################################################################
+#########################################################################################################################################################################################
+#########################################################################################################################################################################################
+
+
 while True:
     global error_previo
     global integral
@@ -870,8 +942,9 @@ while True:
         break
     elif c1 == 'red' or c3 == 'red':
         motor_pair.start_tank(0,0)
+        wait_for_seconds(30)
+        print("The robot's ended!!!")
         b.write("Rojo\n")
-        break
     elif hub.motion_sensor.get_pitch_angle() > 10:
         subida()
     elif hub.motion_sensor.get_pitch_angle() < -8:
@@ -903,8 +976,6 @@ while True:
             else:
                 motor_pair.start_tank(0,0)
 
-
-
 """
                 if luz_3 < 19 or luz_1 < 19:
                     salida = int(2.6 * proporcional + ki * integral + kd * derivada)
@@ -916,3 +987,73 @@ while True:
                     salida = int(0.9 * proporcional + ki * integral + kd * derivada)
                     motor_pair.start_tank(35 + salida,35 - salida)
 """
+
+############################ RESCUE AREA #########################
+####### VARIABLES THAT NEED TO BE INITIALIZATED WITH EVERY WHILE #######
+global green_corner
+green_corner = False
+global dist_rescue
+global state
+global vict_status
+global claw_status
+state = ''
+substate = ''
+
+while True:
+    update()
+    if col_1 == 'plateado' or col_3 == 'plateado':
+        state = 'rescue'
+        substate = 'looking for green corner'
+
+    if state == 'rescue' and substate == 'looking for green corner':
+        green_corner = False
+        while green_corner != True:
+            update()
+            motor_pair.start_tank(20, 20)
+            rescue_com("Rescue\n")
+            if dist_rescue == 'n':
+                turn_x_degrees(86)
+            if col_1 == 'green' or col_3 == 'green':
+                green_corner = True
+                motor_pair.start_tank(0, 0)
+                susbtate = 'depositing the rescue kit'
+                counter = 0
+                rescue_com('Rescue_dball_cube\n')
+                motor_pair.move_tank(5, 'cm', -20, -20)
+                wait_for_seconds(5)
+                print(claw_status)
+                if claw_status == 'Unknown':
+                    rescue_com("Rescue\n")
+                    turn_x_degrees(86)
+                    substate = 'look for exit'
+            """counter = 0
+            rescue_com("Rescue_lv\n")
+            while (counter != 1): # While the counter is not 1, the robot will look for a victim
+                if vict_status == 'S':
+                    print("Spotted Victim")"""
+                
+    if state == 'rescue' and substate == 'look for exit':
+        update()
+        print("We've changed the Substate!!")
+        black_tape = False
+        while black_tape != True:
+            update()
+            motor_pair.start_tank(20, 20)
+            rescue_com("Rescue\n")
+            print("NOW WE ARE IN RESCUE")
+            if dist_rescue == 'n':
+                turn_x_degrees(86)
+            if luz_1 < 20 and luz_3 < 20:
+                black_tape = True
+                motor_pair.start_tank(0, 0)
+                """
+                susbtate = 'depositing the rescue kit'
+                counter = 0
+                rescue_com('Rescue_dball_cube\n')
+                motor_pair.move_tank(5, 'cm', -20, -20)
+                wait_for_seconds(5)
+                break
+    """
+    
+    if state == 'rescue' and substate == 'looking for ball':
+        motor_pair.start_tank(0, 0)
