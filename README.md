@@ -16,7 +16,7 @@ In order to make this possible, we are using electronic components, 3D-designed 
 - Arduino Nano
 - 4 Time-of-Flight sensors
 - Standard Servo
-- Mini Digital Servo
+- Mini Servo
 - Custom board for Arduino Nano
 - 2 custom boards for Time-of-Flight sensors (can hold up to 3 of them each, though we are only 2 on each side)
 (Boards available at ```Placas Robotica``` )
