@@ -30,6 +30,9 @@ sen_2 = ColorSensor("D")
 sen_3 = ColorSensor("F")
 
 # PID
+global error_previo
+global integral
+
 error = 0
 error_previo = 0
 integral = 0
@@ -42,7 +45,7 @@ salida = 0
 
 
 global s
-######################### UPDATE #########################
+
 def update():
     global r1,g1,b1,ov1
     global r3,g3,b3,ov3
@@ -79,6 +82,12 @@ def update():
         # print('no: ',r3,g3,b3)
         col_3 = 'no'
 
+    global c1
+    global c3
+
+    c1 = sen_1.get_color()
+    c3 = sen_3.get_color()
+
 
     global luz_1
     global luz_2
@@ -87,9 +96,8 @@ def update():
     luz_1 = sen_1.get_reflected_light()
     luz_2 = sen_2.get_reflected_light()
     luz_3 = sen_3.get_reflected_light()
-############################################################################################################################################################################################
-################################################################################# LINE FOLLOWING FUNCTIONS #################################################################################
-######################### TURNS #########################
+
+
 def giro_90_der():
     motor_pair.start_tank(0,0)
     # wait_for_seconds(1)
@@ -115,12 +123,12 @@ def giro_90_izq():
 def giro_180_der():
     giro_90_der()
     giro_90_der()
-    motor_pair.move_tank(0.7,'cm',30,-30)
+    # motor_pair.move_tank(2.5,'cm',30,-30)
 
 def giro_180_izq():
     giro_90_izq()
     giro_90_izq()
-    motor_pair.move_tank(0.7,'cm',-30,30)
+    # motor_pair.move_tank(2.5,'cm',-30,30)
 
 def girar_num_grados_der(num):
     hub.motion_sensor.reset_yaw_angle()
@@ -129,7 +137,6 @@ def girar_num_grados_der(num):
     motor_pair.start_tank(0, 0)
     hub.motion_sensor.reset_yaw_angle()
 
-######################### GREENS #########################
 def posible_verde():
     pera = 0
     hub.motion_sensor.reset_yaw_angle()
@@ -164,6 +171,7 @@ def posible_verde():
                 motor_pair.start_tank(60,-60)
             motor_pair.start_tank(0,0)
 
+
 def verifica_verde():
     manzana = 0
     pera = 0
@@ -179,7 +187,12 @@ def verifica_verde():
     update()
     if col_1 == 'green' and col_3 == 'green':
         giro_180_der()
-        motor_pair.move_tank(0.5,'cm',80,80)
+        update()
+        while luz_2 > 21:
+            update()
+            motor_pair.start_tank(30,-30)
+        # buscar_linea('der')
+        motor_pair.move_tank(2,'cm',80,80)
         update()
         # if color_3 == 'green' or color_1 == 'green':
         #    motor_pair.move_tank(1.5,'cm',50,50)
@@ -190,7 +203,11 @@ def verifica_verde():
         update()
         if col_1 == 'green' and col_3 == 'green':
             giro_180_der()
-            motor_pair.move_tank(0.5,'cm',80,80)
+            update()
+            while luz_2 > 21:
+                update()
+                motor_pair.start_tank(30,-30)
+            motor_pair.move_tank(2,'cm',80,80)
             update()
         else:
             # motor_pair.move_tank(0.7,'cm',-80,20)
@@ -198,11 +215,11 @@ def verifica_verde():
                 # motor_pair.move_tank(0.9,'cm',-100,0)
                 # motor_pair.move_tank(0.5,'cm',-80,-80)
                 # motor_pair.move_tank(1,'cm',50,50)
-                motor_pair.move_tank(5.3,'cm',50,80)
+                motor_pair.move_tank(4,'cm',30,30)
                 giro_90_der()
                 # motor_pair.move_tank(2,'cm',30,30)
                 buscar_linea('der')
-                motor_pair.move_tank(1.8,'cm',80,50)
+                motor_pair.move_tank(1,'cm',50,50)
                 update()
                 if luz_2 > 40:
                     motor_pair.move_tank(0.8,'cm',-80,-80)
@@ -218,17 +235,23 @@ def verifica_verde():
         if col_3 == 'green' and col_1 == 'green':
             giro_180_izq()
             update()
+            while luz_2 > 21:
+                update()
+                motor_pair.start_tank(-30,30)
+            # buscar_linea('izq')
+            motor_pair.move_tank(2,'cm',80,80)
+            update()
         else:
             # motor_pair.move_tank(0.7,'cm',20,-80)
             if col_1 == 'green' and not col_3 == 'green':
                 # motor_pair.move_tank(0.9,'cm',0,-100)
                 # motor_pair.move_tank(0.5,'cm',-80,-80)
                 # motor_pair.move_tank(1,'cm',50,50)
-                motor_pair.move_tank(5.3,'cm',80,50)
+                motor_pair.move_tank(5,'cm',30,30)
                 giro_90_izq()
                 # motor_pair.move_tank(2,'cm',30,30)
                 buscar_linea('izq')
-                motor_pair.move_tank(1.8,'cm',50,80)
+                motor_pair.move_tank(1,'cm',50,50)
                 update()
                 if luz_2 > 40:
                     motor_pair.move_tank(0.8,'cm',-50,-50)
@@ -275,12 +298,13 @@ def buscar_linea(direccion):
                 motor_pair.start_tank(80,-80)
             # motor_pair.move_tank(0.7,'cm',80,-80)
 
+
 def verifica_l_giro():
     manzana = 0
     update()
     motor_pair.move_tank(0.3,'cm',-80,-80)
     if luz_1 < 40 and luz_2 < 40 and luz_3 < 40:
-        motor_pair.move_tank(4,'cm',80,80)
+        motor_pair.move_tank(5,'cm',80,80)
     elif luz_3 < 40 or luz_1 < 40:
         # print('capaz',r1,g1,b1,'    ',r3,g3,b3)
         # motor_pair.move_tank(2.5,'cm',-80,-80)
@@ -297,7 +321,7 @@ def verifica_l_giro():
             # motor_pair.move_tank(0.7,'cm',-80,-80)
             # wait_for_seconds(0.1)
             hub.motion_sensor.reset_yaw_angle()
-            while (hub.motion_sensor.get_yaw_angle() > -32):
+            while (hub.motion_sensor.get_yaw_angle() > -34):
                 update()
                 motor_pair.start_tank(-80,80)
                 if luz_2 < 30:
@@ -305,7 +329,7 @@ def verifica_l_giro():
                     # motor_pair.move_tank(2.5,'cm',30,30)
                     update()
                     buscar_linea("izq")
-                    motor_pair.move_tank(2.4,'cm',50,30)
+                    motor_pair.move_tank(3,'cm',50,30)
                     if col_1 == 'green' or col_3 == 'green':
                         motor_pair.move_tank(1.5,'cm',80,80)
                     manzana = 1
@@ -314,7 +338,7 @@ def verifica_l_giro():
             wait_for_seconds(0.1)
             if manzana == 0:
                 hub.motion_sensor.reset_yaw_angle()
-                while hub.motion_sensor.get_yaw_angle() < 31:
+                while hub.motion_sensor.get_yaw_angle() < 33:
                     motor_pair.start_tank(80,-80)
                 # motor_pair.move_tank(0,'cm',0,0)
                 # motor_pair.move_tank(0.5,'cm',80,-80)
@@ -332,7 +356,7 @@ def verifica_l_giro():
                             # motor_pair.move_tank(2.5,'cm',30,30)
                             update()
                             buscar_linea("der")
-                            motor_pair.move_tank(2.4,'cm',30,50)
+                            motor_pair.move_tank(3,'cm',30,50)
                             if col_1 == 'green' or col_3 == 'green':
                                 motor_pair.move_tank(1.5,'cm',80,80)
                             manzana = 1
@@ -368,11 +392,10 @@ def verifica_l_giro():
         manzana = 0
     manzana = 0
 
-######################### DOUBLE BLACK #########################
 def verifica_doble_negro():
     motor_pair.start_tank(0,0)
     # wait_for_seconds(1)
-    motor_pair.move_tank(0.4,'cm',80,80)
+    # motor_pair.move_tank(0.4,'cm',80,80)
     update()
     if col_1 == 'green' or col_3 == "green":
         verifica_verde()
@@ -381,16 +404,50 @@ def verifica_doble_negro():
     else:
         correccion = luz_1 - luz_3
         correccion = int(correccion * 1.5)
-        motor_pair.move_tank(2,'cm',-45 - correccion,-45 + correccion)
+        motor_pair.move_tank(4,'cm',-45 - correccion,-45 + correccion)
         if correccion > 0:
-            motor_pair.move_tank(1.5,'cm',-80,80)
+            motor_pair.move_tank(2,'cm',-80,80)
         else:
-            motor_pair.move_tank(1.5,'cm',80,-80)
+            motor_pair.move_tank(2,'cm',80,-80)
         # motor_pair.move_tank(2,'cm',-30,-30)
 
 
-######################### OBSTACLE DETECTION #########################
+def distance_com():
+    global s
+    global dist
+    b.write("Obstaculo\n")
+    # motor_pair.start_tank(0, 0)
+    # wait_for_seconds(0.2)
+    s=b.read(5).decode()
+    print(s)
+    if (s!='R' and s!='RR' and s!='RRR'):
+        if (s!='C' and s!='CC' and s!='CCC'):
+            if (s!='S' and s!='SS' and s!='SSS'):
+                if (s!='L' and s!='LL' and s!='LLL'):
+                    if (s!='M' and s!='MM' and s!='MMM'):
+                        if (s!='N' and s!='NN' and s!='NNN'):
+                            dist = 7
+                        else:
+                            dist = 6
+                    else:
+                        dist = 5
+                else:
+                    dist = 4
+            else:
+                dist = 3
+        else:
+            dist = 2
+    else:
+        dist = 1
+    print(dist)
+
 ant = 0
+
+
+#################################################
+#################################################
+#################################################
+
 def obstacle_detection():
     global ant
     global s
@@ -441,7 +498,7 @@ def obstacle_detection():
             wait_for_seconds(2)
             if (dist == 6):# si la distancia es mayor a 20
                 motor_pair.move_tank(3.5, 'cm', -42, 100) # Antes estaba en 24
-                motor_pair.move_tank(17, 'cm', 41, 100)
+                motor_pair.move_tank(17, 'cm', 30, 100)
                 # hub.light_matrix.show_image('HEART')
                 timer.reset()
                 color_1 = sen_1.get_reflected_light()
@@ -449,14 +506,14 @@ def obstacle_detection():
                 wait_for_seconds(0.5)
                 while (color_1 > 20): # Antes estaba en 45
                     color_1 = sen_1.get_reflected_light()
-                    motor_pair.start_tank(36, 100)
+                    motor_pair.start_tank(28, 100)
                     if (timer.now() > 1):
                         color_1 = sen_1.get_reflected_light()
                         print("Quinto While")        #########################################
                         wait_for_seconds(0.5)
                         while (color_1 > 20):
                             color_1 = sen_1.get_reflected_light()
-                            motor_pair.start_tank(30, 100)
+                            motor_pair.start_tank(15, 100)# antes estaba 30
                             timer.reset()
                 motor_pair.start_tank(0, 0)
                 hub.light_matrix.show_image('DIAMOND')
@@ -480,7 +537,7 @@ def obstacle_detection():
                 hub.motion_sensor.reset_yaw_angle()
                 motor_pair.start_tank(0, 0)
                 motor_pair.move_tank(3.5, 'cm', 100, 60)
-                motor_pair.move_tank(17, 'cm', 100, 40)
+                motor_pair.move_tank(17, 'cm', 100, 30)
                 hub.light_matrix.show_image('HEART')
                 timer.reset()
                 color_2 = sen_2.get_reflected_light()
@@ -488,12 +545,12 @@ def obstacle_detection():
                 wait_for_seconds(0.5)
                 while (color_2 > 20): # Antes estaba en 45
                     color_2 = sen_2.get_reflected_light()
-                    motor_pair.start_tank(100, 36)
+                    motor_pair.start_tank(100, 28)
                     if (timer.now() > 1.5):
                         color_2 = sen_2.get_reflected_light()
                         while (color_2 > 20):
                             color_2 = sen_2.get_reflected_light()
-                            motor_pair.start_tank(100, 21) # Antes eran 80/18
+                            motor_pair.start_tank(100, 15) # Antes eran 80/18
                             timer.reset()
                 motor_pair.start_tank(0, 0)
                 motor_pair.move_tank(2, 'cm', 50, 50)
@@ -514,18 +571,18 @@ def obstacle_detection():
             hub.motion_sensor.reset_yaw_angle()
             motor_pair.start_tank(0, 0)
             motor_pair.move_tank(4.8, 'cm', 100, 88)
-            motor_pair.move_tank(13, 'cm', 95, 40)
+            motor_pair.move_tank(13, 'cm', 95, 30)
             hub.light_matrix.show_image('HEART')
             timer.reset()
             color_2 = sen_2.get_reflected_light()
             while (color_2 > 20): # Antes estaba en 45
                 color_2 = sen_2.get_reflected_light()
-                motor_pair.start_tank(100, 40)
+                motor_pair.start_tank(100, 28)
                 if (timer.now() > 1.5):
                     color_2 = sen_2.get_reflected_light()
                     while (color_2 > 20):
                         color_2 = sen_2.get_reflected_light()
-                        motor_pair.start_tank(100, 20) # Antes eran 80/18
+                        motor_pair.start_tank(100, 15) # Antes eran 80/18
                         timer.reset()
             motor_pair.start_tank(0, 0)
             motor_pair.move_tank(2, 'cm', 50, 50)
@@ -564,18 +621,18 @@ def obstacle_detection():
             wait_for_seconds(0.5)
             if (dist == 6):    # si distancia es mayor a 20
                 motor_pair.move_tank(3, 'cm', 96, -39) # Antes estaba en 24
-                motor_pair.move_tank(17, 'cm', 95, 36)
+                motor_pair.move_tank(17, 'cm', 95, 30)
                 hub.light_matrix.show_image('HEART')
                 timer.reset()
                 color_2 = sen_2.get_reflected_light()
                 while (color_2 > 20): # Antes estaba en 45
                     color_2 = sen_2.get_reflected_light()
-                    motor_pair.start_tank(95, 34)
+                    motor_pair.start_tank(100, 28)
                     if (timer.now() > 1.2):
                         color_2 = sen_2.get_reflected_light()
                         while (color_2 > 20):
                             color_2 = sen_2.get_reflected_light()
-                            motor_pair.start_tank(95, 23)
+                            motor_pair.start_tank(100, 15)
                             timer.reset()
                 motor_pair.start_tank(0, 0)
                 hub.light_matrix.show_image('DIAMOND')
@@ -636,12 +693,12 @@ def obstacle_detection():
             color_2 = sen_2.get_reflected_light()
             while (color_2 > 20): # Antes estaba en 45
                 color_2 = sen_2.get_reflected_light()
-                motor_pair.start_tank(34, 100)
+                motor_pair.start_tank(28, 100)
                 if (timer.now() > 1.2):
                     color_2 = sen_2.get_reflected_light()
                     while (color_2 > 20):
                         color_2 = sen_2.get_reflected_light()
-                        motor_pair.start_tank(26, 100) # Antes eran 80/18
+                        motor_pair.start_tank(15, 100) # Antes eran 80/18
                         timer.reset()
             motor_pair.start_tank(0, 0)
             hub.light_matrix.show_image('DIAMOND')
@@ -653,151 +710,168 @@ def obstacle_detection():
             motor_pair.start_tank(0, 0)
             motor_pair.move_tank(3, 'cm', 50, 50)
 
-######################### RAMP AND SEESAW #########################
-def subida():
-    error = 0
-    error_previo = 0
-    integral = 0
-    derivada = 0
-    proporcional = 0
-    kp = 3.95    # 3.95 antes
-    ki = 0.02
-    kd = 0.4
-    salida = 0
 
-    motor_pair.start_tank(20,20)
-    wait_for_seconds(0.6)
+#################################################
+#################################################
+#################################################
+
+
+def subida():
+    t_inicial = timer.now()
     motor_pair.start_tank(0,0)
-    b.write("Mov_Big_Down\n")
     b.write("Mov_Big_Down\n")
     b.write("Mov_Big_Down\n")
     b.write("Mov_Big_Down\n")
     wait_for_seconds(4)
-    motor_pair.move_tank(4, 'cm', 30, 30)
+    motor_pair.move_tank(2, 'cm', -20, -20)
+    while timer.now() - t_inicial < 2:
+        PID(1, 10)
+
+    motor_pair.start_tank(20,20)
+    wait_for_seconds(0.6)
+    motor_pair.start_tank(0,0)
+    motor_pair.move_tank(2, 'cm', 30, 30)
     wait_for_seconds(1)
 
-
     while hub.motion_sensor.get_pitch_angle() > 1:
-        update()
-        error = luz_1 - luz_3
-        proporcional = error
-        integral = integral + error * 0.05
-        derivada = (error - error_previo)
-        # salida = int(kp * proporcional + ki * integral + kd * derivada)
-        error_previo = error
-        salida = int(0.5 * proporcional)
-        motor_pair.start_tank(20 + salida,20 - salida)
+        PID(1, 20)
 
     motor_pair.start_tank(0,0)
-    motor_pair.move_tank(2, 'cm', 20, 20)
+    motor_pair.move_tank(1, 'cm', 20, 20)
     wait_for_seconds(0.2)
 
-    while hub.motion_sensor.get_pitch_angle() != 0:
-        update()
-        error = luz_1 - luz_3
-        proporcional = error
-        integral = integral + error * 0.05
-        derivada = (error - error_previo)
-        # salida = int(kp * proporcional + ki * integral + kd * derivada)
-        error_previo = error
-        salida = int(0.5 * proporcional)
-        motor_pair.start_tank(20 + salida,20 - salida)
+    while hub.motion_sensor.get_pitch_angle() != -1 and hub.motion_sensor.get_pitch_angle() != 0 and hub.motion_sensor.get_pitch_angle() != 1:
+        # PID(1, 20)
+        if luz_3 < 19 or luz_1 < 19:
+            PID(2.6, 20)
+        else:
+            PID(1.7, 35)
 
     b.write("Mov_Big_Up\n")
-    motor_pair.move_tank(4, 'cm', 20, 20)
+    verifica_bajada()
+    # motor_pair.move_tank(1, 'cm', 20, 20)
     wait_for_seconds(1)
     s=b.read(3).decode()
     if s == 'O' or s == 'A' or s == 'OO' or s == 'AO' or s == 'AOO' or s == 'AAO':
         motor_pair.start_tank(0,0)
         wait_for_seconds(1)
 
-def bajada():
-    error = 0
-    error_previo = 0
-    integral = 0
-    derivada = 0
-    proporcional = 0
-    kp = 3.95    # 3.95 antes
-    ki = 0.02
-    kd = 0.4
-    salida = 0
 
+def bajada():
+    t_inicial = timer.now()
     motor_pair.start_tank(0,0)
-    motor_pair.move_tank(8, 'cm', -20, -20)
+    motor_pair.move_tank(4, 'cm', -20, -20)
+    while timer.now() - t_inicial < 2:
+        PID(1, 0)
+    motor_pair.move_tank(5, 'cm', -20, -20)
     motor_pair.start_tank(0,0)
     b.write("Mov_Big_Down\n")
     b.write("Mov_Big_Down\n")
     b.write("Mov_Big_Down\n")
     wait_for_seconds(4)
     # print("hola")
-    motor_pair.move_tank(5, 'cm', 30, 30)
+    # motor_pair.move_tank(5.5, 'cm', 30, 30)
+    # motor_pair.move_tank(7, 'cm', 20, 20)
+    while hub.motion_sensor.get_pitch_angle() > -1:
+        PID(0.3, 30)
     wait_for_seconds(1)
     while hub.motion_sensor.get_pitch_angle() < -1:
-        update()
-        error = luz_1 - luz_3
-        proporcional = error
-        integral = integral + error * 0.05
-        derivada = (error - error_previo)
-        # salida = int(kp * proporcional + ki * integral + kd * derivada)
-        error_previo = error
-        salida = int(0.1 * proporcional)
-        motor_pair.start_tank(20 + salida,20 - salida)
-
+        motor_pair.start_tank(20,20)
+        # PID(0.5, 30)
     motor_pair.start_tank(0,0)
     b.write("Mov_Big_Up\n")
     wait_for_seconds(1)
+    verifica_bajada()
     s=b.read(3).decode()
     if s == 'O' or s == 'A' or s == 'OO' or s == 'AO' or s == 'AOO' or s == 'AAO':
         motor_pair.start_tank(0,0)
         wait_for_seconds(1)
 
-######################### LEGO-ARDUINO COMMUNICATION UTILITIES #########################
-def distance_com():
-    global s
-    global dist
-    b.write("Obstaculo\n")
-    # motor_pair.start_tank(0, 0)
-    # wait_for_seconds(0.2)
-    s=b.read(5).decode()
-    print(s)
-    if (s!='R' and s!='RR' and s!='RRR'):
-        if (s!='C' and s!='CC' and s!='CCC'):
-            if (s!='S' and s!='SS' and s!='SSS'):
-                if (s!='L' and s!='LL' and s!='LLL'):
-                    if (s!='M' and s!='MM' and s!='MMM'):
-                        if (s!='N' and s!='NN' and s!='NNN'):
-                            dist = 7
-                        else:
-                            dist = 6
-                    else:
-                        dist = 5
+
+def PID(kp_p, velocidad):
+    global error_previo
+    global integral
+    kp = 3.95    # 3.95 antes
+    ki = 0.02
+    kd = 0.4
+
+    update()
+
+    error = luz_1 - luz_3
+    proporcional = error
+    integral = integral + error * 0.05
+    derivada = (error - error_previo)
+    # salida = int(kp * proporcional + ki * integral + kd * derivada)
+    error_previo = error
+    salida = int(kp_p * proporcional + ki * integral + kd * derivada)
+    motor_pair.start_tank(velocidad + salida,velocidad - salida)
+
+
+def verifica_bajada():
+    manzana = 0
+    update()
+    motor_pair.move_tank(0.3,'cm',-80,-80)
+    # motor_pair.move_tank(1.4,'cm',80,80)
+    hub.motion_sensor.reset_yaw_angle()
+    while (hub.motion_sensor.get_yaw_angle() > -70):
+        update()
+        motor_pair.start_tank(-20,30)
+        if luz_2 < 30:
+            motor_pair.start_tank(0,0)
+            update()
+            buscar_linea("izq")
+            motor_pair.move_tank(2,'cm',30,30)
+            manzana = 1
+            break
+    motor_pair.start_tank(0,0)
+    wait_for_seconds(0.1)
+    if manzana == 0:
+        hub.motion_sensor.reset_yaw_angle()
+        while hub.motion_sensor.get_yaw_angle() < 70:
+            motor_pair.start_tank(20,-30)
+        motor_pair.start_tank(0,0)
+        wait_for_seconds(0.1)
+        update()
+        if luz_2 > 1:
+            hub.motion_sensor.reset_yaw_angle()
+            while (hub.motion_sensor.get_yaw_angle() < 70):
+                update()
+                motor_pair.start_tank(30,-20)
+                if luz_2 < 30:
+                    motor_pair.start_tank(0,0)
+                    update()
+                    buscar_linea("der")
+                    motor_pair.move_tank(2,'cm',30,30)
+                    manzana = 1
+                    break
+            motor_pair.start_tank(0,0)
+            wait_for_seconds(0.1)
+            if manzana == 0:
+                hub.motion_sensor.reset_yaw_angle()
+                while hub.motion_sensor.get_yaw_angle() > -70:
+                    motor_pair.start_tank(-30,20)
+                motor_pair.move_tank(1,'cm',-80,-80)
+                update()
+                correccion = luz_1 - luz_3
+                correccion = int(correccion * 1.95)
+                motor_pair.move_tank(2,'cm',-45 + correccion,-45 - correccion)
+                if correccion < 0:
+                    motor_pair.move_tank(0.5,'cm',-80,80)
                 else:
-                    dist = 4
-            else:
-                dist = 3
+                    motor_pair.move_tank(0.5,'cm',80,-80)
         else:
-            dist = 2
+            motor_pair.move_tank(1,'cm',-50,-50)
+            update()
+            correccion = luz_1 - luz_3
+            correccion = int(correccion * 2.5)
+            motor_pair.move_tank(2,'cm',-45 - correccion,-45 + correccion)
+            if correccion < 0:
+                motor_pair.move_tank(1,'cm',-80,80)
+            else:
+                motor_pair.move_tank(1,'cm',80,-80)
     else:
-        dist = 1
-    print(dist)
-
-#########################################################################################################################################################################################
-################################################################################# RESCUE AREA FUNCTIONS #################################################################################
-######################### DETECTION UTILITIES #########################
-def detect_walls(assigned_distance):
-    global s
-    global dist
-    rescue_com('Rescue\n')
-    if (dist_rescue <= assigned_distance): # distancia menor a 10
-        return True
-
-def detect_victims(assigned_distance):
-    global s
-    global dist
-    global vict_status
-    rescue_com('Rescue_v\n')
-    if (vict_status <= assigned_distance):
-        victim_com(rescue_com('SpottedVictim_r\n')) # Spotted Victim - Rescue it!
+        manzana = 0
+    manzana = 0
 
 ######################### LEGO-ARDUINO COMMUNICATION UTILITIES #########################
 def rescue_com(message):
@@ -809,15 +883,12 @@ def rescue_com(message):
     confirmation = False
 
     b.write(message)
-    # motor_pair.start_tank(0, 0)
-    # wait_for_seconds(0.2)
-    s=b.read(5).decode()
-    print(s)
+    s = b.read(5).decode()
     if (s!='n' and s!='nn' and s!='nnn'): # 1: Near
         if (s!='a' and s!='aa' and s!='aaa'): # 2: Always
             if (s!='f' and s!='ff' and s!='fff'): # 3: Far
                 if (s!='u' and s!='uu' and s!='uuu'): # 4: Nule
-                    dist_rescue = 'onion burger'
+                    dist_rescue = 'o'
                 else:
                     dist_rescue = 'u'
             else:
@@ -827,26 +898,21 @@ def rescue_com(message):
     else:
         dist_rescue = 'n'
 
-    if (s!='U' and s!= 'UU' and s!='UUU'): # 1: Nule
-        if (s!='S' and s!='SS' and s!='SSS'): # 2: Spotted Victim
-            if (s!='A' and s!='AA' and s!='AAA'): # 3: Always
-                if (s!='N' and s!='NN' and s!='NNN'): # 4: Non-Spotted
-                    vict_status = 'cheese burger'
-                else:
-                    vict_status = 'N'
+    if (s!='f' and s!= 'ff' and s!='fff'): # 1: Nule
+        if (s!='s' and s!='ss' and s!='sss'): # 2: Spotted Victim
+            if (s!='a' and s!='aa' and s!='aaa'): # 3: Always
+                vict_status = 'cheese burger'
             else:
                 vict_status = 'A'
         else:
             vict_status = 'S'
     else:
-        vict_status = 'U'
+        vict_status = 'F'
 
-    if (s == 'CONFIRMED'):
-        claw_status = 'StandBy'
-        confirmation = True
-    else:
+    if (s!= 'C' and s!= 'CC' and s!= 'CCC'):
         claw_status = 'Unknown'
-        confirmation = confirmation
+    else:
+        claw_status = 'Pos1'
 
 def victim_com(message):
     global claw_status
@@ -868,7 +934,7 @@ def victim_com(message):
 def turn_x_degrees(num):
     hub.motion_sensor.reset_yaw_angle()
     while (hub.motion_sensor.get_yaw_angle() < num):
-        motor_pair.start_tank(90, -85)
+        motor_pair.start_tank(40, -35)
     motor_pair.start_tank(0, 0)
     hub.motion_sensor.reset_yaw_angle()
 
@@ -878,29 +944,31 @@ def turn_x_degrees(num):
 #########################################################################################################################################################################################
 #########################################################################################################################################################################################
 
-######################### LINE-FOLLOWING PART #########################
-"""while True:
+
+while True:
+    global error_previo
+    global integral
     update()
-    error = luz_1 - luz_3
-    proporcional = error
-    integral = integral + error * 0.05
-    derivada = (error - error_previo)
-    # salida = int(kp * proporcional + ki * integral + kd * derivada)
-    error_previo = error
 
     if col_1 == 'plateado' or col_3 == 'plateado':
+        motor_pair.start_tank(0,0)
+        b.write("Plateado\n")
         break
-
+    elif c1 == 'red' or c3 == 'red':
+        motor_pair.start_tank(0,0)
+        wait_for_seconds(30)
+        print("The robot's ended!!!")
+        b.write("Rojo\n")
     elif hub.motion_sensor.get_pitch_angle() > 10:
         subida()
-    elif hub.motion_sensor.get_pitch_angle() < -10:
+    elif hub.motion_sensor.get_pitch_angle() < -8:
         bajada()
     else:
         if col_1 == 'green' or col_3 == 'green':
             motor_pair.start_tank(0,0)
             b.write("Verde\n")
             verifica_verde()
-        elif luz_1 < 20 and luz_3 < 20:
+        elif luz_1 < 28 and luz_3 < 28:
             motor_pair.start_tank(0,0)
             b.write("Doble Negro\n")
             verifica_doble_negro()
@@ -912,99 +980,20 @@ def turn_x_degrees(num):
             if s == 'F':
                 motor_pair.start_tank(0,0)
                 obstacle_detection()
-            if s == 'A':
-                if luz_3 < 25 or luz_1 < 25:
-                    salida = int(2.6 * proporcional + ki * integral + kd * derivada)
-                    motor_pair.start_tank(20 + salida,20 - salida)
+            elif s == 'A' or s == 'AA' or s == 'AAA':
+                if luz_3 > 35 and luz_1 > 35 and luz_3 > 35:
+                    PID(0.4, 40)
+                if luz_3 < 28 or luz_1 < 28:
+                    # PID(2.9, 20)
+                    PID(3.1, 15)
                 else:
-                    salida = int(1.7 * proporcional + ki * integral + kd * derivada)
-                    motor_pair.start_tank(30 + salida,30 - salida)"""
-
-############################ RESCUE AREA #########################
-####### VARIABLES THAT NEED TO BE INITIALIZATED WITH EVERY WHILE ####### 
-global green_corner
-green_corner = False
-global dist_rescue
-global state
-global vict_status
-state = ''
-substate = ''
-
-while True: 
-    update()
-    if col_1 == 'plateado' or col_3 == 'plateado':
-        state = 'rescue'
-        substate = 'looking for green corner'
-
-    if state == 'rescue' and substate == 'looking for green corner':
-        green_corner = False
-        while green_corner != True:
-            update()
-            motor_pair.start_tank(20, 20)
-            rescue_com("Rescue\n")
-            if dist_rescue == 'n':
-                turn_x_degrees(90)
-            if col_1 == 'green' or col_3 == 'green':
-                green_corner = True
-                motor_pair.start_tank(0, 0)
-                susbtate = 'depositing the rescue kit'
-                rescue_com('Rescue_dc\n')
-                wait_for_seconds(14)
-                substate = 'exploring'
-    
-    elif (state == 'rescue') and (substate == 'exploring'):
-        motor_pair.start_tank(20,20)
-        rescue_com("Rescue\n")
-        if dist_rescue == 'n':
-            turn_x_degrees(90)
-            if dist_rescue == 'n':
-                turn_x_degrees(270)
-                motor_pair.move_tank(9, 'cm', 20, 20)
-                substate = 'looking for ball'
+                    # PID(1.8, 35)
+                    PID(1.8, 28)
             else:
-                motor_pair.move_tank(9, 'cm', 20, 20)
-                substate = 'looking for ball'
-
-    elif (state == 'rescue') and (substate == 'looking for ball'):
-        rescue_com("Rescue_lv\n")
-        while turn_x_degrees(90) != True:
-            turn_x_degrees(90)
-            if vict_status == 'N':
-                print("Spotted Victim!")
-                rescue_com("Spotted_Victim")
-                wait_for_seconds(10)
-                         
+                motor_pair.start_tank(0,0)
 
 """
-        substate = 'exploring'
-
-        
-
-        if (state == 'rescue') and (substate == 'looking for ball'):
-            rescue_com("Rescue_v\n")
-            hub.motion_sensor.reset_yaw_angle()
-            while (detect_victims(1 or 3 or 4)) or (hub.motion_sensor.get_yaw_angle() < 90):
-                hub.light_matrix.show_image('HAPPY')
-                motor_pair.start_tank(20, 20) # TO TEST
-            motor_pair.start_tank(0, 0)
-            hub.motion_sensor.reset_yaw_angle()
-
-        if (state == 'rescue') and (substate == 'looking for green'):
-            motor_pair.start_tank(20,20)
-            if detect_walls(1):
-                motor_pair.start_tank(0,0)
-                if sen_1.get_reflected_light() > 85 and sen_3.get_reflected_light() > 85:
-                    motor_pair.move_tank(4, 'cm', 20, 20)
-                    # DEPOSIT CUBE
-                    # CHANGE STATE
-                else:
-                    turn_x_degrees(90)
-                    if detect_walls(1):
-                        turn_x_degrees(270)
-                    else:
-                        pass
-
-if luz_3 < 19 or luz_1 < 19:
+                if luz_3 < 19 or luz_1 < 19:
                     salida = int(2.6 * proporcional + ki * integral + kd * derivada)
                     motor_pair.start_tank(20 + salida,20 - salida)
                 elif luz_3 < 25 or luz_1 < 25:
@@ -1014,3 +1003,92 @@ if luz_3 < 19 or luz_1 < 19:
                     salida = int(0.9 * proporcional + ki * integral + kd * derivada)
                     motor_pair.start_tank(35 + salida,35 - salida)
 """
+
+############################ RESCUE AREA #########################
+####### VARIABLES THAT NEED TO BE INITIALIZATED WITH EVERY WHILE #######
+global green_corner
+green_corner = False
+global dist_rescue
+global state
+global vict_status
+global claw_status
+state = ''
+substate = ''
+
+while True:
+    update()
+    if col_1 == 'plateado' or col_3 == 'plateado':
+        state = 'rescue'
+        substate = 'looking for green corner'
+    if col_1 == 'plateado' and col_3 != 'plateado':
+        while col_3 != 'plateado':
+            update()
+            motor_pair.start_tank(-20,20)
+            if col_1 == 'plateado' and col_3 == 'plateado':
+                state = 'rescue'
+                substate = 'looking for green corner'
+    if col_1 != 'plateado' and col_3 == 'plateado':
+        while col_1 != 'plateado':
+            update()
+            motor_pair.start_tank(20, -20)
+            if col_1 == 'plateado' and col_3 == 'plateado':
+                state = 'rescue'
+                substate = 'looking for green corner'
+
+    if state == 'rescue' and substate == 'looking for green corner':
+        green_corner = False
+        while green_corner != True:
+            update()
+            motor_pair.start_tank(20, 20)
+            rescue_com("Rescue\n")
+            if dist_rescue == 'n':
+                turn_x_degrees(86)
+            if col_1 == 'green' or col_3 == 'green':
+                green_corner = True
+                motor_pair.start_tank(0, 0)
+                susbtate = 'depositing the rescue kit'
+                counter = 0
+                rescue_com('Rescue_dball_cube\n')
+                motor_pair.move_tank(5, 'cm', -20, -20)
+                wait_for_seconds(5)
+                print(claw_status)
+                if claw_status == 'Unknown':
+                    rescue_com("Rescue\n")
+                    turn_x_degrees(86)
+                    substate = 'look for exit'
+            """counter = 0
+            rescue_com("Rescue_lv\n")
+            while (counter != 1): # While the counter is not 1, the robot will look for a victim
+                if vict_status == 'S':
+                    print("Spotted Victim")"""
+
+    if state == 'rescue' and substate == 'look for exit':
+        update()
+        print("We've changed the Substate!!")
+        black_tape = False
+        while black_tape != True:
+            update()
+            motor_pair.start_tank(20, 20)
+            rescue_com("Rescue\n")
+            print("WE ARE NOW IN RESCUE")
+            if (dist_rescue == 'n'): # or (col_1 == 'plateado' or col_3 == 'plateado')
+                turn_x_degrees(86)
+            
+            if (col_1 == 'plateado' or col_3 == 'plateado'):
+                motor_pair.move_tank(6, 'cm', -20, -20)
+                turn_x_degrees(82) # antes 86
+
+            if luz_1 < 20 and luz_3 < 20:
+                black_tape = True
+                break
+                """
+                susbtate = 'depositing the rescue kit'
+                counter = 0
+                rescue_com('Rescue_dball_cube\n')
+                motor_pair.move_tank(5, 'cm', -20, -20)
+                wait_for_seconds(5)
+                break
+                """
+
+    if state == 'rescue' and substate == 'looking for ball':
+        motor_pair.start_tank(0, 0)
